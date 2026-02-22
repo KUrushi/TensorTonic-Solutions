@@ -1,3 +1,4 @@
+
 def baseline_predict(ratings_matrix, target_pairs):
     """
     Compute baseline predictions using global mean and user/item biases.
@@ -6,6 +7,13 @@ def baseline_predict(ratings_matrix, target_pairs):
     user_mean = []
     item_mean = []
     global_means = []
+
+    item_counts = len(ratings_matrix[0])
+    items_scores = {
+        "total_ratings": [0.0 for _ in range(item_counts)],
+        "effective_counts": [0.0 for _ in range(item_counts)]
+    }
+    
     for user_ratings in ratings_matrix:
         effective_rating_counts = 0
         total = 0
@@ -14,18 +22,14 @@ def baseline_predict(ratings_matrix, target_pairs):
                 total += user_ratings[i]
                 effective_rating_counts += 1
                 global_means.append(user_ratings[i])
-                
+
+                items_scores['total_ratings'][i] += user_ratings[i]
+                items_scores['effective_counts'][i] += 1
         user_mean.append(total / effective_rating_counts)
 
-    for item_index in range(len(ratings_matrix[0])):
-        effective_rating_counts = 0
-        total = 0
-        for i in range(len(ratings_matrix)):
-            if ratings_matrix[i][item_index] != 0:
-                total += ratings_matrix[i][item_index]
-                effective_rating_counts += 1
+    item_mean = [items_scores['total_ratings'][i]/items_scores['effective_counts'][i]
+                for i in range(item_counts)]
 
-        item_mean.append(total/effective_rating_counts)
                 
     global_means = sum(global_means) / len(global_means)
 
