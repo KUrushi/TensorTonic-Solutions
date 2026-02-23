@@ -17,9 +17,9 @@ def multi_head_attention(Q: np.ndarray, K: np.ndarray, V: np.ndarray,
 
     batch, seq_len, d_model = Q.shape
     d_head = d_model // num_heads
-    Q = Q.reshape(batch, seq_len, num_heads, d_head).transpose(0,3,2,1)
-    K = K.reshape(batch, seq_len, num_heads, d_head).transpose(0,3,2,1)
-    V = V.reshape(batch, seq_len, num_heads, d_head).transpose(0,3,2,1)
+    Q = Q.reshape(batch, seq_len, num_heads, d_head).transpose(0,2,1,3)
+    K = K.reshape(batch, seq_len, num_heads, d_head).transpose(0,2,1,3)
+    V = V.reshape(batch, seq_len, num_heads, d_head).transpose(0,2,1,3)
 
     x = Q @ K.transpose(0,1,3,2)
     x = x / np.sqrt(d_head)
