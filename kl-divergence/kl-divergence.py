@@ -7,4 +7,4 @@ def kl_divergence(p, q, eps=1e-12):
     # Write code here
     p = np.array(p)
     q = np.array(q)
-    return np.sum(p * (np.log(p) - np.log(q+eps)))
+    return np.sum(p * (np.log(p+eps) - np.log(q+eps)))
