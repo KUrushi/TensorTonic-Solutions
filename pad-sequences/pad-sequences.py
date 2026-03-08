@@ -7,20 +7,19 @@ def pad_sequences(seqs, pad_value=0, max_len=None):
       L = max_len if provided else max(len(seq) for seq in seqs) or 0
     """
     # Your code here
-    outputs = []
+    num_samples = len(seqs)
     if max_len is None:
-        max_len = 0
-        for seq in seqs:
-            max_len = max(len(seq), max_len)
+        max_len = max([len(s) for s in seqs], default=0)
 
-    for seq in seqs:
-        output = [i for i in seq[:max_len]]
-        length = len(seq)
-        while (length := len(output)) != max_len:
-            output.append(pad_value)
+    dtype = np.int32
+    out = np.full((num_samples, max_len), pad_value, dtype=dtype)
+    
+    for i, seq in enumerate(seqs):
+        actual_length = min(max_len, len(seq))
+        out[i, :actual_length] = seq[:actual_length]
 
-        outputs.append(output)
-    return np.array(outputs)
+    return out
+
             
             
     
