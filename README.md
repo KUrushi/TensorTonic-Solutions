@@ -85,6 +85,7 @@ Verified machine learning implementations completed on [TensorTonic](https://www
 | Item-Based CF Prediction | Predict a user-item rating with item-based collaborative filtering from rated neighbors and item similarities. | https://www.tensortonic.com/problems/item-cf-predict |
 | Jaccard Similarity | Compute Jaccard similarity between two collections as intersection size divided by union size. | https://www.tensortonic.com/problems/jaccard-similarity |
 | Functional Array Update | Build a weighted histogram in JAX with indexed updates that return new arrays, so repeated bins accumulate and out-of-range indices are ignored under jit. | https://www.tensortonic.com/problems/jax-l01-functional-array-update |
+| Masked Mean Without Boolean Indexing | Compute a masked mean in JAX with jnp.where so every shape stays static under jit, returning 0 for slices with no valid entries. | https://www.tensortonic.com/problems/jax-l01-masked-mean |
 | PRNG Key Splitting | Generate reproducible per-layer dropout masks in JAX from one seed by splitting PRNG keys explicitly and never reusing a key. | https://www.tensortonic.com/problems/jax-l01-prng-key-splitting |
 | Implement KL Divergence | Compute Kullback-Leibler divergence between discrete distributions in NumPy, with safe handling of zero probabilities and tests in the browser. | https://www.tensortonic.com/problems/kl-divergence |
 | Implement Cosine Similarity | Compute cosine similarity between NumPy vectors with explicit handling for zero-norm inputs. | https://www.tensortonic.com/problems/la-cosine-similarity |
